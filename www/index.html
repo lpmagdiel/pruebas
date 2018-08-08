@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+	<title>Loreto BC</title>
+	
+	<!-- Path to Framework7 Library CSS-->
+	<link rel="stylesheet" href="css/framework7.ios.min.css">
+	
+	<!-- Path to your custom app styles-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cardo">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Maven+Pro">
+	
+	<!-- App Style -->
+	<link rel="stylesheet" href="css/my-app.css">
+</head>
+
+<body>
+<!-- Status bar overlay for fullscreen mode-->
+<div class="statusbar-overlay"></div>
+
+<!-- Panels overlay-->
+<div class="panel-overlay"></div>
+
+<!-- Left panel with reveal effect-->
+<div class="panel panel-left panel-reveal">
+	<div class="content-block">
+		<p>Left panel content goes here</p>
+	</div>
+</div>
+
+<!-- Right panel with cover effect-->
+<div class="panel panel-right panel-cover">
+	<div class="content-block">
+		<p>Right panel content goes here</p>
+	</div>
+</div>
+
+<!-- Views-->
+<div class="views">
+	<!-- Your main view, should have "view-main" class-->
+	<div class="view view-main">
+		<div id="dFooter">
+			<div id="dNav">
+				<div class="row">
+					<!-- Each "cell" has col-[widht in percents] class -->
+					<div class="col-30 ">
+						<a class="back" href="#">
+							<img src="images/flechaBack.svg">
+							
+							<img id="helpF3" src="images/fia.png" style="display: none; width: 25px; height:25px; position: relative; transform: translate(15px, -210%);">
+							<img id="helpF3Message" src="images/f3_es.png" style="display: none; height: 25px; position: absolute; left: 50px; top: 50%; transform: translate(-50%, -300%);">
+						</a>
+					</div>
+					<div class="col-33 text-center">
+						<a href="#menu">
+							<img src="images/botonMenu.svg">
+							<img id="helpF4" src="images/fab.png" style="display: none; width: 30px; height:30px; position: relative; transform: translate(15%, -190%);">
+							<img id="helpF4Message" src="images/f4_es.png" style="display: none; height: 25px; position: absolute; left: 50%; top: 50%; transform: translate(-60%, -300%);">
+						</a>
+					</div>
+					<div class="col-33 text-right">
+						<a id="help" href="#help">
+							<img id="helpIcon" src="images/botonAyuda.svg">
+						</a>
+						<a href="#preferencias">
+							<img src="images/botonSetting.svg">
+							<img id="helpF5" src="images/fda.png" style="display: none; width: 25px; height:25px; position: relative; transform: translate(-15px, -210%);">
+							<img id="helpF5Message" src="images/f5_es.png" style="display: none; height: 50px; position: absolute; right: -20px; top: 50%; transform: translate(-50%, -200%);">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+		<div class="pages navbar-through toolbar-through">
+			<!-- Mapa -->
+			<div id="mapa" data-page="mapa" class="page">
+				<div id="gmap2"></div>
+				<div id="dLista2">
+					<div id="dListaTit2" class="row">
+						<!-- Each "cell" has col-[widht in percents] class -->
+						<div class="col-20"></div>
+						<div id="titLista" class="col-50 text-tit">
+							<span id="mapaTit1">Próximos Eventos</span>
+						</div>
+						<div class="col-20 text-right">
+							<a class="link_expan" href="#">
+								<img src="images/fechaArriba.svg">
+							</a>
+						</div>
+					</div>
+					<div id="dScroll2">
+						<div class="lista02m">
+							<ul id="listaMapa" class="row no-gutter">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Index-->
+			<div data-page="index" class="page dIndex">
+				<!-- Scrollable page content-->
+				<div>
+					<div class="dLogo">
+						<img id="logoLoreto" src="images/logo.png">
+					</div>
+					
+					<div class="dSlogan">
+						<img id="slogan" src="images/ExploraViveLoreto_es.png">
+					</div>
+					
+					<div class="dLanguage">
+						<div class="dCenter">
+							<table align="center">
+								<tr>
+									<td colspan="3">
+										<span style="color: #FFFFFF; font-size: large; "><b>Idioma / Language</b></span>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 10px;">
+										<a onclick="updateLanguage('es')">
+											<img src="images/es.png" style="width: 100%; max-width: 50px;">
+										</a>
+									</td>
+									<td></td>
+									<td style="padding: 10px;">
+										<a onclick="updateLanguage('en')">
+											<img src="images/en.png" style="width: 100%; max-width: 50px;">
+										</a>
+									</td>
+								</tr>
+								<tr height="5">
+									<td id="esSelector" style="font-size: xx-large; background-color: #FFFFFF; border-radius: 50px;"></td>
+									<td></td>
+									<td id="enSelector" style="font-size: xx-large; background-color: #FFFFFF; border-radius: 50px; visibility: hidden"></td>
+								</tr>
+								<tr>
+									<td style="padding: 10px;">
+										Español
+									</td>
+									<td></td>
+									<td style="padding: 10px;">
+										English
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					
+					<div style="margin-top: 200px; z-index: 777;">
+						<div>
+							<span id="languageMessage">Al ingresar a <b>Discover Loreto</b> estoy aceptando los <b>Términos y condiciones</b> de la misma.</span>
+						</div>
+					</div>
+					
+					<div>
+						<a href="#main">
+							<div style="z-index: 888; padding: 5px; margin-left: 30px; margin-right: 30px; margin-top:30px; background-color: #FFFFFF; border-radius: 50px; font-size: x-large; color: #000000">
+								Entrar / Go ->
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Main-->
+			<div data-page="main" class="page cached dMain">
+				<!-- Scrollable page content-->
+				<div>
+					<div class="dLogoH">
+						<a href="#menu">
+							<img id="logoexplora" src="images/bglogo_logo_es.png">
+						</a>
+						<div id="weather" class="clima"></div>
+					</div>
+					<div id="gmap"></div>
+					
+					<div id="overlay" onclick="hideHelp()" style="display: none; width: 100%; height:100%; position: absolute; transform: translate(0%, -100%); background-color: #000000; opacity: 0.4; z-index: 3000">
+						<img id="helpLogo" src="images/ayuda_es.png" style="display: none; width: 100px; position: absolute; left: 50%; top: 65%; transform: translate(-50%, -100%);">
+						<img id="helpMessage" src="images/ayuda_msg_es.png" style="display: none; height: 50px; position: absolute; left: 50%; top: 65%; transform: translate(-50%, 20%);">
+						
+						<img id="helpF1" src="images/far.png" style="display: none; width: 25px; height:25px; position: absolute; left: 50%; top:160px; transform: translate(-30%, -50%);">
+						<img id="helpF1Message" src="images/f1_es.png" style="display: none; height: 50px; position: absolute; left: 50%; top: 210px; transform: translate(-45%, -50%);">
+						
+						<img id="helpF2" src="images/fda.png" style="display: none; width: 25px; height:25px; position: absolute; right: 5px; top: 60%; transform: translate(-15px, 0%);">
+						<img id="helpF2Message" src="images/f2_es.png" style="display: none; height: 25px; position: absolute; right: 0px; top: 60%; transform: translate(-50%, -120%);">
+					</div>
+					
+					<div id="dLista">
+						<div id="dListaTit" class="row">
+							<!-- Each "cell" has col-[widht in percents] class -->
+							<div class="col-20"></div>
+							<div class="col-50 text-tit">
+								<span id="indexTit1">Próximos Eventos</span>
+							</div>
+							<div class="col-20 text-right">
+								<a class="link_expan" href="#">
+									<img src="images/fechaArriba.svg">
+								</a>
+							</div>
+						</div>
+						<div id="dScroll">
+							<div class="list-block media-list">
+								<ul id="listaInicio" class="lista01">
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Menu Page-->
+			<div data-page="menu" class="page cached dMenu">
+				<div class="page-content">
+					<span class="tit01"><span id="tit3"></span></span>
+					<div class="row no-gutter">
+						<div class="col-50 text-center">
+							<a id="m_conoce" href="#conoce">
+								<img src="images/conoce.png">
+								<br>
+								<span id="tit4"></span>
+							</a>
+						</div>
+						<div class="col-50 text-center">
+							<a id="m_menu1" data-tipo="1" data-tit="Hoteles"
+							   href="#busqueda">
+								<img src="images/hoteles.png">
+								<br>
+								<span id="tit5"></span>
+							</a>
+						</div>
+					</div>
+					<div class="row no-gutter">
+						<div class="col-50 text-center">
+							<a id="m_menu2" data-tit="Restaurantes"
+							   href="#busqueda">
+								<img src="images/restaurantes.png">
+								<br>
+								<span id="tit6"></span>
+							</a>
+						</div>
+						<div class="col-50 text-center">
+							<a id="m_menu3" data-tit="Tours y más"
+							   href="#busqueda">
+								<img src="images/tours.png">
+								<br>
+								<span id="tit7"></span>
+							</a>
+						</div>
+					</div>
+					<div class="row no-gutter">
+						<div class="col-50 text-center">
+							<a href="#directorio">
+								<img src="images/directorio.png">
+								<br>
+								<span id="tit8"></span>
+							</a>
+						</div>
+						<div class="col-50 text-center">
+							<a href="#eventos">
+								<img src="images/eventos.png">
+								<br>
+								<span id="tit9"></span>
+							</a>
+						</div>
+					</div>
+					<div style="margin-top: 20px">
+						<img id="menuTitle" src="images/ExploraViveLoreto_es.png">
+					</div>
+				</div>
+			</div>
+			
+			<!-- Busqueda Page-->
+			<div data-page="busqueda" class="page cached dBusqueda">
+				<!-- Search Bar overlay -->
+				<form data-search-list=".list-block-search" data-search-in=".lista02H h4"
+				      class="searchbar searchbar-init">
+					
+					<div class="searchbar-input">
+						<input id="txtBuscar" type="search" placeholder="Buscar...">
+						<a href="#"
+						   class="searchbar-clear"></a>
+						<table width="100%">
+							<tr>
+								<td width="50%">
+									<select id="ESTRELLAS" name="filtro1">
+										<option id="opStars">Estrellas</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+									
+									<select id="CMBRESTAURANT" name="filtro1"></select>
+									
+									<select id="CMBTOUR" name="filtro1"> </select>
+								</td>
+								<td width="50%">
+									<select id="UBICACION" name="filtro2"> </select>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<br>
+				
+				
+				</form>
+				<div class="searchbar-overlay"></div>
+				
+				<div class="page-content">
+					<div class="content-block searchbar-not-found">
+						Sin resultados
+					</div>
+					<div class="link_verenmapa" id="openmap">
+						<a href="#mapa">
+							<img id="icovermapa" src="images/verenmapa_es.png">
+						</a>
+					</div>
+					<div>
+						<p id="noResults" style="padding: 20px; color: #FFFFFF; font-size: 15px; text-align: center">Lo sentimos, no hay opciones con esas características. Favor de hacer otra búsqueda.</p>
+					</div>
+					<div class="lista02 list-block-search searchbar-found">
+						<ul class="row no-gutter">
+						
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Eventos Page-->
+			<div data-page="eventos" class="page cached dEventos">
+				<div class="page-content">
+					<div class="list-block media-list">
+						<ul id="listaEventos" class="lista01">
+						</ul>
+					</div>
+				
+				</div>
+			</div>
+			
+			<!-- Conoce Page-->
+			<div data-page="conoce" class="page cached dConoce">
+				<div class="page-content">
+					<ul class="lista04">
+					</ul>
+				</div>
+			</div>
+			
+			<!-- Detalle Conoce Page-->
+			<div id="det_conoce" data-page="det_conoce" class="page cached det_conoce">
+				<div class="page-content">
+					<div class="dStage">
+					</div>
+					<div class="row no-gutter">
+						<div class="col-25">
+							<img width="25%" src="images/linea01.png">
+						</div>
+						<div class="col-75 text-right pRight10">
+							<a href="#panoramica" class="link_panoramica det_conoce_panoramica" href="#">
+								<img width="22%" src="images/360.png">
+							</a>
+							<a class="mapa det_conoce_mapa" href="#mapa">
+								<img id="icoubicar" width="22%"
+								     src="images/ubicar2_es.png">
+							</a>
+						</div>
+					</div>
+					<div class="dDetalleC dDetalleCo">
+						<h2 class="dTit"></h2>
+						<div class="descripcion"></div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Detalle Eventos Page-->
+			<div id="det_evento" data-page="det_evento" class="page cached det_evento">
+				<div class="page-content">
+					<div class="dStage">
+					</div>
+					<div class="row no-gutter line01">
+						<div class="col-25">
+							<div class="dFecha2">
+							</div>
+						</div>
+						<div class="col-75 text-right">
+							<div class="dTit">
+							</div>
+						</div>
+					</div>
+					<div class="dDetalle">
+						<h4 id="hPlace">Lugar:
+							<span class="lugar">Playa Buena Vista</span>
+						</h4>
+						<h4 id="hTime">Hora:
+							<span class="hora">8:00am</span>
+						</h4>
+						<div class="descripcion">
+							<p>El hotel Loreto Bay promueve al máximo el disfrute del entorno natural con actividades como: Avistamiento de ballenas, pesca deportiva, kayak, bicicleta de montaña,
+								snorkel y buceo, paddle board, visitas a las Misiones y Pinturas Rupestres.</p>
+						</div>
+					
+					</div>
+				</div>
+			</div>
+			
+			<!-- Detalle Cliente Page-->
+			<div id="det_cliente" data-page="det_cliente" class="page cached det_cliente">
+				<div class="page-content">
+					<div class="dStage">
+					</div>
+					<div>
+						<div class="buttons-row">
+							<a href="#tab1" id="tabTitle1" class="tab-link active button">Info</a>
+							<a href="#tab2" id="tabTitle2" class="tab-link button tabServicio">Servicios</a>
+							<a href="#tab6" id="tabTitle6" class="tab-link button tabServicio">Tarifas</a>
+							<a href="#tab5" id="tabTitle5" class="tab-link button tabMenu">Menú</a>
+							<a href="#tab3" id="tabTitle3" class="tab-link button">Fotos</a>
+							<a href="#tab4" id="tabTitle4" class="tab-link button">Promociones</a>
+						</div>
+						<div class="tabs dDetalleC">
+							<div id="tab1" class="tab active">
+								<div>
+									<h2 class="dTit"></h2>
+									<div class="row">
+										<div class="col-50">
+											<!--<img src="images/star.png" style="width: 50%">-->
+											<div id="rateYo"></div>
+											<span class="tZona"></span>
+											<br>
+											<span class="tSubcategoria"></span>
+										</div>
+										<div class="col-50 text-right rss">
+											<a class="mapa det_conoce_mapa" href="#mapa">
+												<img
+														src="images/ubicar.png">
+											</a>
+											<a class="facebook external" target="_blank" href="#">
+												<img
+														src="images/facebook.png">
+											</a>
+											<a class="twitter external" target="_blank" href="#">
+												<img
+														src="images/twitter.png">
+											</a>
+										</div>
+									</div>
+									<div class="descripcion">
+									</div>
+									<ul class="lista03">
+										<li>
+											<p><strong>Web:</strong>
+												<a class="www external" target="_blank"></a>
+											</p>
+										</li>
+										<li>
+											<p><strong>Email:</strong>
+												<a class="email external" target="_blank"></a>
+											</p>
+										</li>
+										<li>
+											<p><strong id="lbPhone">Teléfono:</strong>
+												<a class="telefono external"
+												   target="_blank"></a>
+											</p>
+										</li>
+										<!--<li class="tabTarifa">
+										  <p><strong>Tarifa:</strong> <span class="tarifa"></span></p>
+										</li>-->
+										<li>
+											<p><strong id="lbAddress">Dirección:</strong>
+												<br>
+												<span class="direccion"></span>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div id="tab2" class="tab">
+								<div class="servicios row">
+								</div>
+							</div>
+							<div id="tab3" class="tab">
+								<div class="galeria">
+								
+								</div>
+								<div class="text-center">
+									<a href="#panoramica" class="link_panoramica mTop20" href="#">
+										<img width="22%"
+										     src="images/360.png">
+									</a>
+								</div>
+							</div>
+							<div id="tab4" class="tab">
+								<div class="promo">
+								</div>
+							</div>
+							<div id="tab5" class="tab">
+								<div class="menu">
+								
+								</div>
+							</div>
+							<div id="tab6" class="tab">
+								<div class="dTarifas">
+								
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Detalle Cliente Page-->
+			<div id="directorio" data-page="directorio" class="page cached det_directorio">
+				<div class="page-content">
+					<div class="dTittel">
+						<table width="100%">
+							<tr>
+								<td width="73%">
+									<img src="images/telefono.svg">
+								</td>
+								<td width="27%">
+									<span id="tit11"></span>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<ul class="lista03">
+					
+					</ul>
+				</div>
+			</div>
+			
+			<!-- Detalle panoramica-->
+			<div id="panoramica" data-page="panoramica" class="page cached">
+				<div>
+				</div>
+			</div>
+			
+			<!-- Terminos y condiciones -->
+			<div data-page="termsAndConditions" class="page cached">
+				<div class="page-content">
+					<div class="dTittel" style="margin-top: -44px">
+						<span id="tit12"></span>
+					</div>
+					<div id="titPref14" style="font-size: 20px; font-weight: bold; margin-left: 20px;">Términos y Condiciones</div>
+					<br>
+					<div id="termsAndConditionsBody" style="margin-left: 20px; margin-right: 20px; margin-top: -20px;"></div>
+				</div>
+			</div>
+			
+			<!-- Preferencias-->
+			<div id="preferencias" data-page="preferencias" class="page cached det_directorio">
+				<div class="page-content">
+					<div class="dTittel">
+						<table width="100%">
+							<tr>
+								<td width="73%"></td>
+								<td width="27%">
+									<span id="tit10"></span>
+								</td>
+							</tr>
+						</table>
+					</div>
+					
+					<ul class="lista_pref">
+						
+						<h4 class="m-b-5 title-sections" id="tabPrefer1">
+							<span id="titPref1">Nuestras Secciones</span>
+						</h4>
+						<h4 class="m-b-5 item-preferences">
+							<a href="#main">
+								<span id="titPref2">Home</span>
+							</a>
+						</h4>
+						<h4 class="m-b-5 item-preferences">
+							<a id="tabPrefer2" href="#conoce">
+								<span id="titPref3">Conoce Loreto</span>
+							</a>
+						</h4>
+						<h4 class="m-b-5 item-preferences">
+							<a href="#eventos"> <span
+									id="titPref4">Próximos Eventos </span>
+							</a>
+						</h4>
+						<h4 class="m-b-5 item-preferences">
+							<a href="#directorio">
+								<span id="titPref5">Directorio de Emergencias</span>
+							</a>
+						</h4>
+						<h4 class="m-b-5 item-preferences">
+							<a id="l_menu1" data-tit="Hoteles"
+							   href="#busqueda">
+								<span id="titPref6">Hoteles</span>
+							</a>
+						</h4>
+						<h4 class="m-b-5 item-preferences">
+							<a id="l_menu2" data-tit="Restaurantes"
+							   href="#busqueda">
+								<span id="titPref7">Restaurantes </span>
+							</a>
+						</h4>
+						<h4 class="m-b-5 item-preferences">
+							<a id="l_menu3" data-tit="Tours y más"
+							   href="#busqueda"> <span
+									id="titPref8">Tours y más</span>
+							</a>
+						</h4>
+						<h4 class="m-b-5 item-preferences">
+							<a data-tit="Tours y más"
+							   href="#main" onclick="markWillShowHelp()">
+								<span id="titPref9">¿Cómo usar esta app?</span>
+							</a>
+						</h4>
+						
+						
+						<li class="idiomas">
+							<h4 class="m-b-5">
+								<span id="titPref13">Idioma / Language</span>
+							</h4>
+							<a class="img-mex" data-idioma="es" href="#">
+								<img src="images/es.png" width="40">
+							</a>
+							<a class="img-us" data-idioma="en" href="#">
+								<img src="images/en.png" width="40">
+							</a>
+							<br>
+						</li>
+						<h4 class="m-b-5 item-preferences">
+							<a class="m_menu" href="#termsAndConditions">
+								<span id="titPref12">Términos y Condiciones</span>
+							</a>
+						</h4>
+						<h1 class="custom-border"></h1>
+						<h4 class="m-b-5 ">
+							<span id="titPref10">Dudas o Comentarios</span>
+						</h4>
+						
+						<h4 class="m-b-5 item-preferences">
+							<span id="titPref11">Escribenos a</span>
+							<label id="contactMail">
+								<a href="#">contact@loretobaja.mx</a>
+							</label>
+						</h4>
+						<br>
+					</ul>
+				
+				</div>
+			</div>
+			
+			<div data-page="temp" class="page cached">
+				<div class="page-content">
+					
+					<div class="card data-table">
+						<table id="tabla001" class="tTabla01">
+							<tbody>
+							</tbody>
+						</table>
+						<table id="tabla00" class="tTabla01">
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				
+				</div>
+			</div>
+		
+		</div>
+	</div>
+</div>
+
+<div id="output_agregar"></div>
+
+<!-- Path to Framework7 Library JS-->
+<script type="text/javascript" src="js/extensions.js"></script>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/simpleweather.js"></script>
+<script type="text/javascript" src="js/plugins.js"></script>
+
+<!-- Path to your app js-->
+<script type="text/javascript" src="js/my-app.js"></script>
+
+<!-- GMaps -->
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCyBaZs86If3oY_Tb_HqobaA-cPcaccMdk&callback=initMap"></script>
+
+</body>
+</html>
